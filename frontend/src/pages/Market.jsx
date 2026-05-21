@@ -17,7 +17,7 @@
 
 import { useAccount } from 'wagmi';
 import { useContract } from '../hooks/useContract';
-import TaskBoard from '../components/TaskBoard/TaskBoard';
+import TaskBoard from '../components/TaskBoard';
 
 export default function Market() {
   const { address } = useAccount();
@@ -30,17 +30,33 @@ export default function Market() {
     await postTask(description, rewardWei, deadline, minRep);
   };
 
-  // 节点接单
   const handleAcceptTask = async (taskId) => {
-    if (!address) {
-      alert('请先连接钱包');
-      return;
-    }
+    if (!address) { alert('请先连接钱包'); return; }
     try {
       await acceptTask(taskId);
       alert('接单成功！');
     } catch (err) {
       alert('接单失败: ' + err.message);
+    }
+  };
+
+  const handleConfirmTask = async (taskId) => {
+    try {
+      await confirmResult(taskId);
+      alert('报酬已释放！');
+    } catch (err) {
+      alert('确认失败: ' + err.message);
+    }
+  };
+
+  const handleDisputeTask = async (taskId) => {
+    const reason = prompt('请输入争议原因：');
+    if (!reason) return;
+    try {
+      await disputeResult(taskId, reason);
+      alert('争议已发起，报酬已退回');
+    } catch (err) {
+      alert('争议失败: ' + err.message);
     }
   };
 
@@ -67,6 +83,8 @@ export default function Market() {
         tasks={tasks}
         loading={loading}
         onAcceptTask={handleAcceptTask}
+        onConfirmTask={handleConfirmTask}
+        onDisputeTask={handleDisputeTask}
         onPostTask={handlePostTask}
         userAddress={address}
       />

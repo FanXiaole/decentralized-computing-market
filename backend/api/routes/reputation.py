@@ -140,14 +140,18 @@ async def get_market_stats(
     for node in nodes:
         total_staked += blockchain.get_node_stake(node.address)
 
-    # 统计已完成任务
+    # 统计已完成任务数
+    from sqlalchemy import func
     completed_tasks = (
-        db.query(NodeRecord.completed_tasks)
-    )
+        db.query(NodeRecord)
+        .with_entities(func.sum(NodeRecord.completed_tasks))
+        .scalar()
+    ) or 0
 
     return {
         "active_nodes": total_nodes,
         "total_tasks": total_tasks,
+        "completed_tasks": completed_tasks,
         "total_staked_wei": total_staked,
-        "updated_at": None,  # 前端可用新的Date()代替
+        "updated_at": None,
     }
