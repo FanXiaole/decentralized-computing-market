@@ -42,7 +42,6 @@ export function useContract() {
 
       if (total === 0) {
         setTasks([]);
-        setLoading(false);
         return;
       }
 
@@ -224,7 +223,7 @@ export function useContract() {
       if (!staking || !token) throw new Error('合约未配置');
 
       // 先approve
-      const approveTx = await token.approve(CONTRACTS.stakingManager, amountWei);
+      const approveTx = await token.approve(staking.target, amountWei);
       await approveTx.wait();
 
       // 再stake

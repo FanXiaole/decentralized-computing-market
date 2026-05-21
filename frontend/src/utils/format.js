@@ -69,6 +69,14 @@ export function formatRelativeTime(timestamp) {
   return formatDate(timestamp);
 }
 
+// 任务状态枚举常量
+// 对应ComputeMarket.sol中TaskStatus枚举的定义
+export const STATUS_OPEN = 0;
+export const STATUS_IN_PROGRESS = 1;
+export const STATUS_UNDER_REVIEW = 2;
+export const STATUS_COMPLETED = 3;
+export const STATUS_DISPUTED = 4;
+
 /**
  * 任务状态文本映射
  * @param {number} status - 状态枚举值
@@ -76,11 +84,11 @@ export function formatRelativeTime(timestamp) {
  */
 export function getTaskStatusInfo(status) {
   const map = {
-    0: { label: '待接单', color: 'var(--accent-blue)' },
-    1: { label: '进行中', color: 'var(--accent-orange)' },
-    2: { label: '审核中', color: 'var(--accent-orange)' },
-    3: { label: '已完成', color: 'var(--accent-green)' },
-    4: { label: '已争议', color: 'var(--accent-red)' },
+    [STATUS_OPEN]: { label: '待接单', color: 'var(--accent-blue)' },
+    [STATUS_IN_PROGRESS]: { label: '进行中', color: 'var(--accent-orange)' },
+    [STATUS_UNDER_REVIEW]: { label: '审核中', color: 'var(--accent-orange)' },
+    [STATUS_COMPLETED]: { label: '已完成', color: 'var(--accent-green)' },
+    [STATUS_DISPUTED]: { label: '已争议', color: 'var(--accent-red)' },
   };
   return map[status] || { label: '未知', color: '#666' };
 }

@@ -2,13 +2,12 @@
  * StakingPanel — 质押管理面板组件
  *
  * 允许GPU节点存入/提取质押代币
- * 通过useContract Hook统一管理合约交互
  */
 
 import { useState, useEffect, useCallback } from 'react';
 import { ethers } from 'ethers';
 import { formatETH } from '../utils/format';
-import { getProvider, getStakingContract, getTokenContract } from '../utils/web3';
+import { getProvider, getStakingContract, getTokenContract, CONTRACTS } from '../utils/web3';
 
 export default function StakingPanel({ address, onStakeComplete }) {
   const [stakeBalance, setStakeBalance] = useState('0');
@@ -46,7 +45,7 @@ export default function StakingPanel({ address, onStakeComplete }) {
       const token = getTokenContract(signer);
       const amountWei = ethers.parseEther(stakeAmount);
 
-      const approveTx = await token.approve(await staking.getAddress(), amountWei);
+      const approveTx = await token.approve(CONTRACTS.stakingManager, amountWei);
       await approveTx.wait();
       const stakeTx = await staking.stake(amountWei);
       await stakeTx.wait();

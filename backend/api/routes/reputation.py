@@ -6,7 +6,7 @@
 
 from fastapi import APIRouter, Depends, HTTPException, Query
 from sqlalchemy.orm import Session
-from sqlalchemy import desc
+from sqlalchemy import desc, func
 from typing import Optional
 
 from ..dependencies import get_db, get_blockchain
@@ -140,8 +140,6 @@ async def get_market_stats(
     for node in nodes:
         total_staked += blockchain.get_node_stake(node.address)
 
-    # 统计已完成任务数
-    from sqlalchemy import func
     completed_tasks = (
         db.query(NodeRecord)
         .with_entities(func.sum(NodeRecord.completed_tasks))
