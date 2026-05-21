@@ -1,0 +1,28 @@
+# OS files
+.DS_Store
+
+# Dependencies
+node_modules/
+
+# Build artifacts
+artifacts/
+cache/
+dist/
+build/
+
+# Environment & secrets
+.env
+.env.*
+!.env.example
+
+# Bitcoin core data
+BitcoinData/
+
+# Hardhat demo (deprecated)
+HardhatDemo/
+
+# IDE
+.idea/
+.vscode/
+*.swp
+*.swo

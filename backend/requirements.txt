@@ -1,0 +1,9 @@
+# DecentAI Compute Market — Python Backend Dependencies
+fastapi==0.115.0
+uvicorn[standard]==0.30.0
+web3==7.0.0
+sqlalchemy==2.0.35
+aiosqlite==0.20.0
+pydantic==2.9.0
+python-dotenv==1.0.1
+cryptography==43.0.0
