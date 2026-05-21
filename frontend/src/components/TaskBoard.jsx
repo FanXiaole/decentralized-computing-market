@@ -12,7 +12,7 @@
  */
 
 import { useState, useMemo } from 'react';
-import { formatETH, formatRelativeTime, getTaskStatusInfo } from '../utils/format';
+import { formatETH, formatRelativeTime, getTaskStatusInfo, STATUS_OPEN, STATUS_IN_PROGRESS, STATUS_UNDER_REVIEW, STATUS_COMPLETED } from '../utils/format';
 
 export default function TaskBoard({ tasks, loading, onAcceptTask, onConfirmTask, onDisputeTask, onPostTask, userAddress }) {
   // 筛选条件
@@ -26,9 +26,9 @@ export default function TaskBoard({ tasks, loading, onAcceptTask, onConfirmTask,
     return tasks.filter((task) => {
       if (minReward && parseFloat(task.rewardETH) < parseFloat(minReward)) return false;
       if (minReputation && task.minReputation < Number(minReputation)) return false;
-      if (statusFilter === 'open' && task.status !== 0) return false;
-      if (statusFilter === 'active' && ![0, 1].includes(task.status)) return false;
-      if (statusFilter === 'completed' && task.status !== 3) return false;
+      if (statusFilter === 'open' && task.status !== STATUS_OPEN) return false;
+      if (statusFilter === 'active' && ![STATUS_OPEN, STATUS_IN_PROGRESS].includes(task.status)) return false;
+      if (statusFilter === 'completed' && task.status !== STATUS_COMPLETED) return false;
       return true;
     });
   }, [tasks, minReward, minReputation, statusFilter]);
@@ -86,7 +86,6 @@ export default function TaskBoard({ tasks, loading, onAcceptTask, onConfirmTask,
           const status = getTaskStatusInfo(task.status);
           return (
             <div key={task.taskId} className="glass-card" style={{ padding: '1.25rem' }}>
-              {/* 任务头部 */}
               <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '0.75rem' }}>
                 <span className="data-font" style={{ fontSize: '0.75rem', color: 'var(--text-secondary)' }}>
                   #{task.taskId}
@@ -97,12 +96,10 @@ export default function TaskBoard({ tasks, loading, onAcceptTask, onConfirmTask,
                 </span>
               </div>
 
-              {/* 任务描述 */}
               <p style={{ fontSize: '0.9rem', marginBottom: '0.75rem', lineHeight: '1.5', wordBreak: 'break-word' }}>
                 {task.description}
               </p>
 
-              {/* 任务详情 */}
               <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '0.5rem', marginBottom: '1rem', fontSize: '0.8rem' }}>
                 <div>
                   <span style={{ color: 'var(--text-secondary)', fontSize: '0.7rem' }}>报酬</span>
@@ -128,9 +125,7 @@ export default function TaskBoard({ tasks, loading, onAcceptTask, onConfirmTask,
                 </div>
               </div>
 
-              {/* 操作按钮 */}
-              {/* 节点可以接单：任务状态为Open(0) 且 不是自己发布的任务 */}
-              {task.status === 0 && task.poster.toLowerCase() !== userAddress?.toLowerCase() && (
+              {task.status === STATUS_OPEN && task.poster.toLowerCase() !== userAddress?.toLowerCase() && (
                 <button
                   className="btn-primary"
                   onClick={() => onAcceptTask(task.taskId)}
@@ -140,8 +135,7 @@ export default function TaskBoard({ tasks, loading, onAcceptTask, onConfirmTask,
                 </button>
               )}
 
-              {/* 需求方操作：任务状态为UnderReview(2) */}
-              {task.status === 2 && task.poster.toLowerCase() === userAddress?.toLowerCase() && (
+              {task.status === STATUS_UNDER_REVIEW && task.poster.toLowerCase() === userAddress?.toLowerCase() && (
                 <div style={{ display: 'flex', gap: '0.5rem' }}>
                   <button
                     className="btn-primary"

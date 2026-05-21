@@ -7,7 +7,15 @@
       "Bash(npx hardhat *)",
       "Bash(python3 -c \"import sys; sys.path.insert\\(0, 'backend'\\); from reputation.models import NodeRecord, TaskRecord, ScoreHistory; print\\('Models OK'\\)\")",
       "Bash(npx create-vite@latest frontend --template react)",
-      "Bash(npm run *)"
+      "Bash(npm run *)",
+      "Bash(python3 -c ' *)",
+      "Bash(git status *)",
+      "Bash(git commit -m ' *)",
+      "Bash(open http://localhost:5173)",
+      "Bash(curl -s http://localhost:5173)",
+      "Bash(curl -s http://localhost:5173/src/main.jsx)",
+      "Bash(git log *)",
+      "Bash(grep -r \"useWallet\" frontend/src/ --include=\"*.jsx\" --include=\"*.js\" --include=\"*.tsx\" --include=\"*.ts\")"
     ]
   }
 }
