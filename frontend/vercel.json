@@ -1,0 +1,16 @@
+{
+  "buildCommand": "npm run build",
+  "outputDirectory": "dist",
+  "framework": "vite",
+  "rewrites": [
+    { "source": "/(.*)", "destination": "/index.html" }
+  ],
+  "env": {
+    "VITE_CONTRACT_ADDRESS_COMPUTE_MARKET": "@contract_compute_market",
+    "VITE_CONTRACT_ADDRESS_STAKING_MANAGER": "@contract_staking_manager",
+    "VITE_CONTRACT_ADDRESS_REPUTATION_ORACLE": "@contract_reputation_oracle",
+    "VITE_CONTRACT_ADDRESS_TOKEN": "@contract_token",
+    "VITE_CHAIN_ID": "@chain_id",
+    "VITE_API_URL": "@api_url"
+  }
+}
