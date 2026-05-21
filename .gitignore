@@ -25,6 +25,9 @@ HardhatDemo/
 __pycache__/
 *.pyc
 
+# Claude Code
+.claude/
+
 # IDE
 .idea/
 .vscode/
