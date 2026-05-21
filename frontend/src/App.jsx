@@ -8,7 +8,7 @@
  */
 
 import { Routes, Route, Link, useLocation } from 'react-router-dom';
-import WalletConnect from './components/WalletConnect/WalletConnect';
+import WalletConnect from './components/WalletConnect';
 import Home from './pages/Home';
 import Market from './pages/Market';
 import Dashboard from './pages/Dashboard';

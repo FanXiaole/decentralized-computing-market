@@ -7,8 +7,8 @@
  * 数据来源：后端信誉评分API
  */
 
-import { useReputation } from '../../hooks/useReputation';
-import { getScoreColor, getScoreLabel } from '../../utils/format';
+import { useReputation } from '../hooks/useReputation';
+import { getScoreColor, getScoreLabel } from '../utils/format';
 
 export default function ReputationCard({ address }) {
   const { score, breakdown, loading } = useReputation(address);

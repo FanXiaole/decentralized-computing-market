@@ -16,7 +16,7 @@ from sqlalchemy.orm import Session
 from dotenv import load_dotenv
 
 from ..reputation.models import init_database
-from .blockchain import get_blockchain_client
+from ..services.blockchain import get_blockchain_client
 
 load_dotenv()
 

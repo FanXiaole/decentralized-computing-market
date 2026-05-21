@@ -13,8 +13,8 @@ import { useState, useEffect } from 'react';
 import { useAccount } from 'wagmi';
 import { useContract } from '../hooks/useContract';
 import { useReputation } from '../hooks/useReputation';
-import StakingPanel from '../components/StakingPanel/StakingPanel';
-import ReputationCard from '../components/ReputationCard/ReputationCard';
+import StakingPanel from '../components/StakingPanel';
+import ReputationCard from '../components/ReputationCard';
 import { formatETH, getTaskStatusInfo } from '../utils/format';
 import { RadarChart, PolarGrid, PolarAngleAxis, PolarRadiusAxis, Radar, ResponsiveContainer } from 'recharts';
 

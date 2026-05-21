@@ -12,9 +12,9 @@
  */
 
 import { useState, useMemo } from 'react';
-import { formatETH, formatRelativeTime, getTaskStatusInfo } from '../../utils/format';
+import { formatETH, formatRelativeTime, getTaskStatusInfo } from '../utils/format';
 
-export default function TaskBoard({ tasks, loading, onAcceptTask, onPostTask, userAddress }) {
+export default function TaskBoard({ tasks, loading, onAcceptTask, onConfirmTask, onDisputeTask, onPostTask, userAddress }) {
   // 筛选条件
   const [minReward, setMinReward] = useState('');
   const [minReputation, setMinReputation] = useState('');
@@ -140,19 +140,19 @@ export default function TaskBoard({ tasks, loading, onAcceptTask, onPostTask, us
                 </button>
               )}
 
-              {/* 需求方确认按钮：任务状态为UnderReview(2) */}
+              {/* 需求方操作：任务状态为UnderReview(2) */}
               {task.status === 2 && task.poster.toLowerCase() === userAddress?.toLowerCase() && (
                 <div style={{ display: 'flex', gap: '0.5rem' }}>
                   <button
                     className="btn-primary"
-                    onClick={() => onAcceptTask(task.taskId)} // need separate confirm handler
+                    onClick={() => onConfirmTask(task.taskId)}
                     style={{ flex: 1, fontSize: '0.8rem', padding: '0.5rem' }}
                   >
                     确认并付款
                   </button>
                   <button
                     className="btn-secondary"
-                    onClick={() => onAcceptTask(task.taskId)} // need separate dispute handler
+                    onClick={() => onDisputeTask(task.taskId)}
                     style={{ fontSize: '0.8rem', padding: '0.5rem', borderColor: 'var(--accent-red)', color: 'var(--accent-red)' }}
                   >
                     争议
