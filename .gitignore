@@ -21,6 +21,10 @@ BitcoinData/
 # Hardhat demo (deprecated)
 HardhatDemo/
 
+# Python
+__pycache__/
+*.pyc
+
 # IDE
 .idea/
 .vscode/
